@@ -1,22 +1,28 @@
 package com.joelgh.movies_2022.data.local.xml
 
 import android.content.Context
+import com.joelgh.movies_2022.app.commons.KSerializer
 import com.joelgh.movies_2022.data.local.MoviesLocalSource
 import com.joelgh.movies_2022.domain.MovieModel
 
-class MoviesXmlLocalDataSource(val context: Context) : MoviesLocalSource{
+class MoviesXmlLocalDataSource(val context: Context, val serializer: KSerializer) : MoviesLocalSource{
 
     val sharedPrefs = context.getSharedPreferences("Movies", Context.MODE_PRIVATE)
 
-    override fun getAll(): List<MovieModel> {
-        TODO("Not yet implemented")
-    }
+    override fun getAll(): List<MovieModel> = sharedPrefs.all.map {
+            serializer.fromJson(it.value.toString(), MovieModel::class.java)
+        }
 
-    override fun findById(movieId: String): MovieModel? {
-        TODO("Not yet implemented")
-    }
+    override fun findById(movieId: String): MovieModel? = serializer.fromJson(
+        sharedPrefs.getString(movieId, null), MovieModel::class.java)
 
     override fun save(movies: List<MovieModel>) {
-        TODO("Not yet implemented")
+        movies.forEach { saveOne(it) }
+    }
+
+    private fun saveOne(movie: MovieModel){
+        sharedPrefs.edit().apply {
+            putString(movie.id, serializer.toJson(movie, MovieModel::class.java))
+        }
     }
 }
