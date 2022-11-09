@@ -2,7 +2,7 @@ package com.joelgh.movies_2022.data.local
 
 import com.joelgh.movies_2022.domain.MovieModel
 
-interface MoviesLocalSource {
+interface LocalDataSource {
 
     fun getAll(): List<MovieModel>
     fun findById(movieId: String): MovieModel?
