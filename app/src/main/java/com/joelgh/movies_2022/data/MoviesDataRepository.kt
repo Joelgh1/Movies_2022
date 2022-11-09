@@ -1,12 +1,25 @@
 package com.joelgh.movies_2022.data
 
 import com.joelgh.movies_2022.data.local.MoviesLocalSource
+import com.joelgh.movies_2022.data.remote.MoviesRemoteSource
 import com.joelgh.movies_2022.domain.MovieModel
 import com.joelgh.movies_2022.domain.MoviesRepository
 
-class MoviesDataRepository(private val localSource: MoviesLocalSource) : MoviesRepository{
+class MoviesDataRepository(private val localSource: MoviesLocalSource,
+                           private val remoteSource: MoviesRemoteSource) : MoviesRepository{
 
-    override fun getAll(): List<MovieModel> = localSource.getAll()
+    override fun getAll(): List<MovieModel> {
+        var movies = localSource.getAll()
 
-    override fun findById(movieId: String): MovieModel? = localSource.findById(movieId)
+        return movies.ifEmpty {
+            movies = remoteSource.getAll()
+            localSource.save(movies)
+            movies
+        }
+    }
+
+    override fun findById(movieId: String): MovieModel? {
+
+        return (localSource.findById(movieId) ?: remoteSource.findById(movieId))
+    }
 }
