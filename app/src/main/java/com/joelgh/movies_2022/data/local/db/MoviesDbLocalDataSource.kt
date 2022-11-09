@@ -1,10 +1,6 @@
 package com.joelgh.movies_2022.data.local.db
 
-
-
-import android.content.Context
 import com.joelgh.movies_2022.app.data.db.Database
-import androidx.room.Room
 import com.joelgh.movies_2022.data.local.MoviesLocalSource
 import com.joelgh.movies_2022.domain.MovieModel
 
