@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Movies_2022</string>
+    <string name="shared_prefs_name">Movies</string>
 </resources>
