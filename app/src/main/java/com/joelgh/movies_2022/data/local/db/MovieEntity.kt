@@ -4,8 +4,15 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+const val TABLE_MOVIE = "movie_entity"
+
+@Entity(tableName = TABLE_MOVIE)
 data class MovieEntity(
-    @PrimaryKey val id: String,
-    @ColumnInfo(name = "title") val title: String
+    @PrimaryKey @ColumnInfo(name = "id") val id: String,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "plot") val plot: String,
+    @ColumnInfo(name = "genre") val genre: String,
+    @ColumnInfo(name = "rating") val rating: String,
+    @ColumnInfo(name = "year") val year: String,
+    @ColumnInfo(name = "posterUrl") val posterUrl: String
 )
