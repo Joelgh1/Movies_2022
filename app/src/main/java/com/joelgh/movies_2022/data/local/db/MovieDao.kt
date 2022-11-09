@@ -13,5 +13,5 @@ interface MovieDao {
     fun findById(movieID: String): MovieEntity?
 
     @Insert
-    fun insertAll(vararg movies: MovieEntity)
+    fun insert(movie: MovieEntity)
 }

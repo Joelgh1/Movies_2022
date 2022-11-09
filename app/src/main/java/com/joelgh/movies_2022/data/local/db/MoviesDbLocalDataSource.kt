@@ -18,7 +18,7 @@ class MoviesDbLocalDataSource(private val db: Database) : MoviesLocalSource {
 
     override fun save(movies: List<MovieModel>) {
         movies.forEach {
-            db.movieDao().insertAll(it.toEntity())
+            db.movieDao().insert(it.toEntity())
         }
     }
 }
