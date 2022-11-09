@@ -1,10 +1,10 @@
 package com.joelgh.movies_2022.data.local.db
 
 import com.joelgh.movies_2022.app.data.db.Database
-import com.joelgh.movies_2022.data.local.MoviesLocalSource
+import com.joelgh.movies_2022.data.local.LocalDataSource
 import com.joelgh.movies_2022.domain.MovieModel
 
-class MoviesDbLocalDataSource(private val db: Database) : MoviesLocalSource {
+class MoviesDbLocalDataSource(private val db: Database) : LocalDataSource {
 
     override fun getAll(): List<MovieModel> = db.movieDao().getAll().map {
         it.toDomain()
