@@ -8,12 +8,7 @@ import androidx.room.Room
 import com.joelgh.movies_2022.data.local.MoviesLocalSource
 import com.joelgh.movies_2022.domain.MovieModel
 
-class MoviesDbLocalDataSource(private val applicationContext: Context) : MoviesLocalSource {
-
-    private val db = Room.databaseBuilder(
-        applicationContext,
-        Database::class.java, "database-name"
-    ).build()
+class MoviesDbLocalDataSource(private val db: Database) : MoviesLocalSource {
 
     override fun getAll(): List<MovieModel> = db.movieDao().getAll().map {
         it.toDomain()
