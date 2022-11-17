@@ -4,7 +4,7 @@ import com.joelgh.movies_2022.domain.MovieModel
 
 interface RemoteDataSource {
 
-    fun getAll(): List<MovieModel>
+    suspend fun getAll(): List<MovieModel>
 
-    fun findById(movieId: String): MovieModel?
+    suspend fun findById(movieId: String): MovieModel?
 }

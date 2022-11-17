@@ -5,7 +5,7 @@ import com.joelgh.movies_2022.domain.MovieModel
 
 class RetrofitRemoteSource(private val apiClient: ApiClient) : RemoteDataSource{
 
-    override fun getAll(): List<MovieModel> = apiClient.getAll()!!.map{it.toDomain()}
+    override suspend fun getAll(): List<MovieModel> = apiClient.getAll()!!.map{it.toDomain()}
 
-    override fun findById(movieId: String): MovieModel? = apiClient.findById(movieId)?.toDomain()
+    override suspend fun findById(movieId: String): MovieModel? = apiClient.findById(movieId)?.toDomain()
 }
