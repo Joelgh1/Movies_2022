@@ -18,10 +18,10 @@ class XmlLocalDataSource(val context: Context, val serializer: KSerializer) : Lo
         sharedPrefs.getString(movieId, null), MovieModel::class.java)
 
     override fun save(movies: List<MovieModel>) {
-        movies.forEach { saveOne(it) }
+        movies.forEach { save(it) }
     }
 
-    private fun saveOne(movie: MovieModel){
+    private fun save(movie: MovieModel){
         sharedPrefs.edit().apply {
             putString(movie.id, serializer.toJson(movie, MovieModel::class.java))
         }
